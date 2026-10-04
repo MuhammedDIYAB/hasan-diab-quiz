@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>اختبار عائلة حسن دياب</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: linear-gradient(180deg, #1A1A2E 0%, #16213E 50%, #0F3460 100%);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .container {
+      width: 100%;
+      max-width: 480px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1.5px solid rgba(255, 215, 0, 0.3);
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      text-align: center;
+    }
+    .emoji {
+      font-size: 60px;
+      margin-bottom: 12px;
+    }
+    h1 {
+      color: #FFD700;
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+    p.subtitle {
+      color: #ccc;
+      font-size: 14px;
+      margin-bottom: 25px;
+      line-height: 1.5;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 14px;
+      border-radius: 16px;
+      border: none;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      font-size: 16px;
+      text-align: center;
+      margin-bottom: 20px;
+      outline: none;
+    }
+    input[type="text"]::placeholder {
+      color: #aaa;
+    }
+    .btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: 16px;
+      border: none;
+      background: #FFD700;
+      color: #000;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .btn:hover {
+      background: #e6c200;
+    }
+    .progress-bar {
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      margin: 15px 0 25px 0;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: #FFD700;
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+    .question-card {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 24px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .option-btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: #0F3460;
+      color: #fff;
+      font-size: 16px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .option-btn:hover {
+      background: #1A1A2E;
+      border-color: #FFD700;
+    }
+    .header-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 15px;
+      font-weight: bold;
+    }
+    .player-name { color: #FFD700; }
+    .q-count { color: #00E5FF; }
+    .score-percentage {
+      font-size: 55px;
+      font-weight: 900;
+      color: #FFD700;
+      margin: 15px 0;
+    }
+    .thanks-box {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 10px;
+      color: #00E5FF;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="app"></div>
+
+  <script>
+    const questions = [
+      {
+        question: 'بماذا يصرخ (الأب/الجد) حسن لزوجته عليا؟',
+        emoji: '📢',
+        options: [
+          { text: '١. علوشة', isCorrect: false },
+          { text: '٢. علوشتيي', isCorrect: false },
+          { text: '٣. يو يااا (مع التفخيم)', isCorrect: true },
+          { text: '٤. يا حبيبتي', isCorrect: false }
+        ]
+      },
+      {
+        question: 'ما هي جامعة (الأب/الجد) حسن؟',
+        emoji: '🎓',
+        options: [
+          { text: '١. جامعة عريقة', isCorrect: false },
+          { text: '٢. جامعة متواجدة بإنكلترا', isCorrect: false },
+          { text: '٣. جامعة أمريكية', isCorrect: false },
+          { text: '٤. طووووط 🚫', isCorrect: true }
+        ]
+      },
+      {
+        question: 'ما هي ساعة الفطور في بيت (الأب/الجد) حسن؟',
+        emoji: '🍳',
+        options: [
+          { text: '١. الساعة ٨ صباحاً', isCorrect: false },
+          { text: '٢. الساعة ٥ صباحاً', isCorrect: true },
+          { text: '٣. الساعة ١٠ صباحاً', isCorrect: false },
+          { text: '٤. لا يوجد ساعة محددة', isCorrect: false }
+        ]
+      },
+      {
+        question: 'ما هي طريقة تدليع الشخص المحبوب لدى (الجد/الأب) حسن؟',
+        emoji: '❤️',
+        options: [
+          { text: '١. يا حبيبي / يا حبيبتي', isCorrect: false },
+          { text: '٢. ولاك / وليك', isCorrect: true },
+          { text: '٣. يا قلبي', isCorrect: false },
+          { text: '٤. يا روحي', isCorrect: false }
+        ]
+      }
+    ];
+
+    let userName = '';
+    let screenState = 0; // 0: Start, 1: Quiz, 2: Result
+    let questionIndex = 0;
+    let score = 0;
+
+    function render() {
+      const app = document.getElementById('app');
+      if (screenState === 0) {
+        app.innerHTML = `
+          <div class="emoji">👑</div>
+          <h1>كم نسبة كونك من بيت حسن دياب؟</h1>
+          <p class="subtitle">اختبار تفاعلي سريع لكشف مدى معرفتك وانتمائك العائلي لبيت حسن دياب! 😉</p>
+          <input type="text" id="nameInput" placeholder="أدخل اسمك الكريم..." value="${userName}">
+          <button class="btn" onclick="startQuiz()">ابدأ الاختبار الآن 🚀</button>
+        `;
+      } else if (screenState === 1) {
+        const q = questions[questionIndex];
+        const progress = ((questionIndex + 1) / questions.length) * 100;
+        app.innerHTML = `
+          <div class="header-info">
+            <span class="player-name">المتسابق: ${userName}</span>
+            <span class="q-count">السؤال ${questionIndex + 1} / ${questions.length}</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: ${progress}%"></div>
+          </div>
+          <div class="question-card">
+            <div class="emoji">${q.emoji}</div>
+            <h2>${q.question}</h2>
+          </div>
+          ${q.options.map((opt, i) => `
+            <button class="option-btn" onclick="answer(${opt.isCorrect})">${opt.text}</button>
+          `).join('')}
+        `;
+      } else if (screenState === 2) {
+        const percentage = Math.round((score / questions.length) * 100);
+        let msg = '';
+        if (percentage === 100) msg = 'أنت من الصلب العائلي لبيت حسن دياب أصلي! 🏆👑';
+        else if (percentage >= 50) msg = 'خبير ومعافى ببيت حسن دياب! 👍✨';
+        else msg = 'تحتاج لزيارة العائلة للتدريب أكثر! 😂';
+
+        app.innerHTML = `
+          <div class="emoji">🎯</div>
+          <p style="color: #aaa;">نتيجة المتسابق: <strong style="color: #fff;">${userName}</strong></p>
+          <div class="score-percentage">${percentage}%</div>
+          <h3 style="margin-bottom: 20px;">${msg}</h3>
+          <div class="thanks-box">شكراً لأنضمامك للاختبار 🌟</div>
+          <button class="btn" onclick="resetQuiz()">إعادة الاختبار 🔄</button>
+        `;
+      }
+    }
+
+    function startQuiz() {
+      const input = document.getElementById('nameInput');
+      if (input.value.trim() !== '') {
+        userName = input.value.trim();
+        screenState = 1;
+        render();
+      }
+    }
+
+    function answer(isCorrect) {
+      if (isCorrect) score++;
+      if (questionIndex + 1 < questions.length) {
+        questionIndex++;
+      } else {
+        screenState = 2;
+      }
+      render();
+    }
+
+    function resetQuiz() {
+      questionIndex = 0;
+      score = 0;
+      screenState = 0;
+      userName = '';
+      render();
+    }
+
+    render();
+  </script>
+</body>
+</html>
